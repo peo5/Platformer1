@@ -1,9 +1,8 @@
 extends KinematicBody2D
 
-const sscale = 20
-const move_speed = 250 * sscale
-const jump_force = -8 * sscale
-const gravity = 10 * sscale
+const move_speed = 4000
+const jump_force = -200
+const gravity = 300
 
 onready var sprite = $Sprite
 onready var animation = $AnimationPlayer
@@ -29,18 +28,16 @@ func _input_process(delta: float) -> void:
 	if move_dir != 0:
 		sprite.scale.x = move_dir
 	
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
+	if vel.y == 0 and Input.is_action_just_pressed("jump"):
 		vel.y = jump_force
-
-# TODO: animation glitches when player moves into a wall
 
 func _anim_process():
 	
 	var state = "idle"
 	
-	if is_on_floor():
-		state = "idle" if vel.x == 0 else "run"
-	else:
+	if is_on_floor() and vel.x != 0:
+		state = "run"
+	elif vel.y != 0:
 		state = "jump" if vel.y < 0 else "fall"
 	
 	if animation.assigned_animation != state:
