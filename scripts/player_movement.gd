@@ -35,10 +35,10 @@ func _anim_process():
 	
 	var state = "idle"
 	
-	if is_on_floor() and vel.x != 0:
-		state = "run"
-	elif vel.y != 0:
+	if vel.y != 0:
 		state = "jump" if vel.y < 0 else "fall"
+	elif vel.x != 0:
+		state = "run"
 	
 	if animation.assigned_animation != state:
 		animation.play(state);
