@@ -282,3 +282,16 @@ anims/run = SubResource( 7 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1, -11.5 )
 shape = SubResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = -40
+limit_bottom = 200
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_left = 0.4
+drag_margin_top = 0.4
+drag_margin_right = 0.4
+drag_margin_bottom = 0.4
+editor_draw_limits = true
+editor_draw_drag_margin = true
