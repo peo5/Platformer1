@@ -1,10 +1,11 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Terrain/Terrain (16x16).png" type="Texture" id=2]
 [ext_resource path="res://assets/Backgrounds/grasslands/4 - Cloud_cover_2.png" type="Texture" id=3]
 [ext_resource path="res://assets/Backgrounds/grasslands/5 - Sky_color.png" type="Texture" id=4]
 [ext_resource path="res://assets/Backgrounds/grasslands/3 - Cloud_cover_1.png" type="Texture" id=5]
+[ext_resource path="res://scripts/fall_zone.gd" type="Script" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -522,6 +523,8 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 } ]
 9/z_index = 0
 
+[sub_resource type="LineShape2D" id=63]
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -580,7 +583,6 @@ scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 5 )
 
 [node name="small_clouds" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2( -8, -33 )
 motion_scale = Vector2( 0.6, 0.6 )
 motion_mirroring = Vector2( 576, 0 )
 
@@ -591,3 +593,17 @@ texture = ExtResource( 5 )
 [node name="4-CloudCover2" type="Sprite" parent="ParallaxBackground/small_clouds"]
 position = Vector2( 92, 76 )
 texture = ExtResource( 5 )
+
+[node name="fall zone" type="Area2D" parent="."]
+position = Vector2( 348, 250 )
+collision_layer = 8
+collision_mask = 0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fall zone"]
+shape = SubResource( 63 )
+
+[connection signal="body_entered" from="fall zone" to="fall zone" method="_on_fall_zone_body_entered"]

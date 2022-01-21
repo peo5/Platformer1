@@ -7,7 +7,7 @@ const gravity = 300
 onready var sprite = $Sprite
 onready var animation = $AnimationPlayer
 
-var vel = Vector2.ZERO
+var vel = Vector2(0.0, 180.0)
 
 func _physics_process(delta: float) -> void:
 	
