@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Terrain/Terrain (16x16).png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/Backgrounds/grasslands/5 - Sky_color.png" type="Texture" id=4]
 [ext_resource path="res://assets/Backgrounds/grasslands/3 - Cloud_cover_1.png" type="Texture" id=5]
 [ext_resource path="res://scripts/fall_zone.gd" type="Script" id=6]
+[ext_resource path="res://scenes/gate.gd" type="Script" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -525,6 +526,10 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="LineShape2D" id=63]
 
+[sub_resource type="SegmentShape2D" id=64]
+a = Vector2( 0, -66 )
+b = Vector2( 0, 78 )
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -606,4 +611,32 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="fall zone"]
 shape = SubResource( 63 )
 
+[node name="gate" type="Node2D" parent="."]
+script = ExtResource( 7 )
+b_camera = NodePath("../Camera2D")
+player = NodePath("../Player")
+
+[node name="back" type="Area2D" parent="gate"]
+position = Vector2( -45, 51 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gate/back"]
+shape = SubResource( 64 )
+
+[node name="front" type="Area2D" parent="gate"]
+position = Vector2( -4, 52 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gate/front"]
+shape = SubResource( 64 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( -162, 52 )
+
 [connection signal="body_entered" from="fall zone" to="fall zone" method="_on_fall_zone_body_entered"]
+[connection signal="body_entered" from="gate/back" to="gate" method="_on_back_body_entered"]
+[connection signal="body_entered" from="gate/front" to="gate" method="_on_front_body_entered"]
