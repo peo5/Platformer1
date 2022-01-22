@@ -1,0 +1,13 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform float intensity = 1.0;
+
+// the offset is defined by tiny variations in the scale (x) of the object
+void vertex()
+{
+	float off_time = TIME + WORLD_MATRIX[0][0]*100.0;
+	VERTEX += vec2(sin(off_time), cos(off_time/2.0))*intensity;
+}"
