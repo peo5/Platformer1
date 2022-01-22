@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Terrain/Terrain (16x16).png" type="Texture" id=2]
@@ -7,7 +7,9 @@
 [ext_resource path="res://assets/Backgrounds/grasslands/3 - Cloud_cover_1.png" type="Texture" id=5]
 [ext_resource path="res://scripts/fall_zone.gd" type="Script" id=6]
 [ext_resource path="res://scenes/gate.gd" type="Script" id=7]
+[ext_resource path="res://scenes/apple.tscn" type="PackedScene" id=8]
 [ext_resource path="res://materials/circular_motion_mat.tres" type="Material" id=9]
+[ext_resource path="res://scenes/banana.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -525,15 +527,77 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 } ]
 9/z_index = 0
 
-[sub_resource type="LineShape2D" id=63]
-
 [sub_resource type="SegmentShape2D" id=64]
 a = Vector2( 0, -66 )
 b = Vector2( 0, 78 )
 
+[sub_resource type="LineShape2D" id=63]
+
 [node name="Node2D" type="Node2D"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="scenery" type="Node2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="scenery"]
+
+[node name="bg_color" type="ParallaxLayer" parent="scenery/ParallaxBackground"]
+motion_mirroring = Vector2( 576, 416 )
+
+[node name="4-CloudCover2" type="Sprite" parent="scenery/ParallaxBackground/bg_color"]
+position = Vector2( 230, 30 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+
+[node name="big_clouds" type="ParallaxLayer" parent="scenery/ParallaxBackground"]
+motion_scale = Vector2( 0.2, 0.2 )
+motion_mirroring = Vector2( 576, 0 )
+
+[node name="4-CloudCover2" type="Sprite" parent="scenery/ParallaxBackground/big_clouds"]
+modulate = Color( 0.734375, 0.896786, 1, 1 )
+position = Vector2( 229, -13 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="back_small_clouds" type="ParallaxLayer" parent="scenery/ParallaxBackground"]
+motion_scale = Vector2( 0.3, 0.3 )
+motion_mirroring = Vector2( 576, 0 )
+
+[node name="4-CloudCover3" type="Sprite" parent="scenery/ParallaxBackground/back_small_clouds"]
+modulate = Color( 0.867188, 0.948393, 1, 1 )
+material = ExtResource( 9 )
+position = Vector2( 433, 47 )
+scale = Vector2( 0.703, 0.703 )
+texture = ExtResource( 5 )
+
+[node name="4-CloudCover2" type="Sprite" parent="scenery/ParallaxBackground/back_small_clouds"]
+modulate = Color( 0.867188, 0.948393, 1, 1 )
+material = ExtResource( 9 )
+position = Vector2( 53, 82 )
+scale = Vector2( 0.714, 0.714 )
+texture = ExtResource( 5 )
+
+[node name="4-CloudCover4" type="Sprite" parent="scenery/ParallaxBackground/back_small_clouds"]
+modulate = Color( 0.867188, 0.948393, 1, 1 )
+material = ExtResource( 9 )
+position = Vector2( 255, 73 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 5 )
+
+[node name="small_clouds" type="ParallaxLayer" parent="scenery/ParallaxBackground"]
+motion_scale = Vector2( 0.6, 0.6 )
+motion_mirroring = Vector2( 576, 0 )
+
+[node name="4-CloudCover3" type="Sprite" parent="scenery/ParallaxBackground/small_clouds"]
+material = ExtResource( 9 )
+position = Vector2( 372, 46 )
+scale = Vector2( 1.025, 1.025 )
+texture = ExtResource( 5 )
+
+[node name="4-CloudCover2" type="Sprite" parent="scenery/ParallaxBackground/small_clouds"]
+material = ExtResource( 9 )
+position = Vector2( 92, 76 )
+texture = ExtResource( 5 )
+
+[node name="TileMap" type="TileMap" parent="scenery"]
 tile_set = SubResource( 42 )
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
@@ -542,71 +606,33 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 65566, 4, 0, 65567, 4, 2, 131088, 5, 0, 131096, 4, 0, 131097, 4, 1, 131098, 4, 2, 196624, 5, 65536, 196625, 5, 0, 262158, 8, 65536, 262159, 8, 65537, 262160, 5, 65536, 262161, 5, 65536, 262179, 9, 0, 262180, 9, 1, 262181, 9, 1, 262182, 9, 1, 262183, 9, 1, 262184, 9, 1, 262185, 9, 1, 262186, 9, 1, 262187, 9, 1, 262188, 9, 1, 262189, 9, 1, 262190, 9, 2, 327682, 7, 0, 327683, 7, 1, 327696, 5, 65536, 327697, 5, 65536, 327698, 5, 0, 327715, 9, 65536, 327716, 9, 65537, 327717, 9, 65537, 327718, 9, 65537, 327719, 9, 65537, 327720, 9, 65537, 327721, 9, 65537, 327722, 9, 65537, 327723, 9, 65537, 327724, 9, 65537, 327725, 9, 65537, 327726, 9, 65538, 393218, 7, 65536, 393219, 7, 65537, 393232, 5, 65536, 393233, 5, 65536, 393234, 5, 65536, 393251, 9, 131072, 393252, 3, 1, 393253, 9, 65537, 393254, 9, 65537, 393255, 9, 65537, 393256, 4, 0, 393257, 4, 2, 393258, 9, 65537, 393259, 9, 65537, 393260, 9, 65537, 393261, 3, 0, 393262, 9, 131074, 524279, 4, 0, 524280, 4, 1, 524281, 4, 1, 524282, 4, 1, 524283, 4, 1, 524284, 4, 2, 458752, 9, 0, 458753, 9, 1, 458754, 9, 1, 458755, 9, 1, 458756, 9, 1, 458757, 9, 1, 458758, 9, 1, 458759, 9, 1, 458760, 9, 1, 458761, 9, 1, 458762, 9, 1, 458763, 9, 1, 458764, 9, 1, 458765, 9, 1, 458766, 9, 1, 458767, 9, 1, 458768, 9, 1, 458769, 9, 1, 458770, 9, 1, 458771, 9, 2, 458775, 9, 0, 458776, 9, 1, 458777, 9, 1, 458778, 9, 1, 458779, 9, 2, 458788, 9, 131072, 458789, 3, 1, 458790, 9, 65537, 458791, 9, 65537, 458792, 9, 65537, 458793, 9, 65537, 458794, 9, 65537, 458795, 9, 65537, 458796, 9, 65537, 458797, 9, 65538, 524288, 9, 65536, 524289, 9, 65537, 524290, 9, 65537, 524291, 9, 65537, 524292, 9, 65537, 524293, 9, 65537, 524294, 9, 65537, 524295, 9, 65537, 524296, 9, 65537, 524297, 9, 65537, 524298, 9, 65537, 524299, 9, 65537, 524300, 9, 65537, 524301, 9, 65537, 524302, 9, 65537, 524303, 9, 65537, 524304, 9, 65537, 524305, 9, 65537, 524306, 9, 65537, 524307, 9, 65538, 524311, 9, 65536, 524312, 9, 65537, 524313, 9, 65537, 524314, 9, 65537, 524315, 3, 65536, 524316, 9, 1, 524317, 9, 2, 524325, 9, 65536, 524326, 9, 65537, 524327, 9, 65537, 524328, 9, 65537, 524329, 9, 65537, 524330, 9, 65537, 524331, 9, 65537, 524332, 9, 65537, 524333, 3, 65536, 524334, 9, 1, 524335, 9, 1, 524336, 9, 1, 524337, 9, 1, 524338, 9, 1, 524339, 9, 1, 524340, 9, 2, 589824, 9, 65536, 589825, 9, 65537, 589826, 9, 65537, 589827, 6, 0, 589828, 9, 65537, 589829, 9, 65537, 589830, 9, 65537, 589831, 9, 65537, 589832, 4, 0, 589833, 4, 2, 589834, 3, 0, 589835, 9, 131073, 589836, 9, 131073, 589837, 9, 131073, 589838, 3, 1, 589839, 0, 65543, 589840, 0, 65543, 589841, 6, 0, 589842, 0, 65543, 589843, 9, 65538, 589847, 9, 65536, 589848, 9, 65537, 589849, 9, 65537, 589850, 9, 65537, 589851, 9, 65537, 589852, 9, 65537, 589853, 3, 65536, 589854, 9, 1, 589855, 9, 1, 589856, 9, 1, 589857, 9, 1, 589858, 9, 1, 589859, 9, 1, 589860, 9, 1, 589861, 3, 65537, 589862, 9, 65537, 589863, 9, 65537, 589864, 9, 65537, 589865, 9, 65537, 589866, 9, 65537, 589867, 9, 65537, 589868, 9, 65537, 589869, 9, 65537, 589870, 9, 65537, 589871, 9, 65537, 589872, 9, 65537, 589873, 9, 65537, 589874, 9, 65537, 589875, 9, 65537, 589876, 9, 65538, 655360, 9, 65536, 655361, 9, 65537, 655362, 9, 65537, 655363, 9, 65537, 655364, 9, 65537, 655365, 9, 65537, 655366, 6, 0, 655367, 9, 65537, 655368, 3, 0, 655369, 9, 131073, 655370, 9, 131074, 655371, 0, 0, 655372, 0, 1, 655373, 0, 2, 655374, 9, 65536, 655375, 0, 65543, 655376, 0, 65543, 655377, 0, 65543, 655378, 0, 65543, 655379, 9, 65538, 655383, 9, 65536, 655384, 9, 65537, 655385, 9, 65537, 655386, 9, 65537, 655387, 9, 65537, 655388, 9, 65537, 655389, 9, 65537, 655390, 9, 65537, 655391, 9, 65537, 655392, 9, 65537, 655393, 9, 65537, 655394, 9, 65537, 655395, 9, 65537, 655396, 9, 65537, 655397, 9, 65537, 655398, 9, 65537, 655399, 9, 65537, 655400, 9, 65537, 655401, 9, 65537, 655402, 9, 65537, 655403, 9, 65537, 655404, 9, 65537, 655405, 9, 65537, 655406, 9, 65537, 655407, 9, 65537, 655408, 9, 65537, 655409, 9, 65537, 655410, 9, 65537, 655411, 9, 65537, 655412, 9, 65538, 720896, 9, 65536, 720897, 9, 65537, 720898, 9, 65537, 720899, 9, 65537, 720900, 9, 65537, 720901, 9, 65537, 720902, 0, 65543, 720903, 9, 65537, 720904, 9, 65538, 720905, 0, 0, 720906, 0, 1, 720907, 1, 65537, 720908, 0, 65537, 720909, 0, 65538, 720910, 9, 65536, 720911, 0, 65543, 720912, 0, 65543, 720913, 0, 65543, 720914, 0, 65543, 720915, 9, 65538, 720919, 9, 65536, 720920, 9, 65537, 720921, 9, 65537, 720922, 9, 65537, 720923, 9, 65537, 720924, 9, 65537, 720925, 0, 65543, 720926, 9, 65537, 720927, 9, 65537, 720928, 9, 65537, 720929, 9, 65537, 720930, 9, 65537, 720931, 9, 65537, 720932, 9, 65537, 720933, 9, 65537, 720934, 9, 65537, 720935, 9, 65537, 720936, 9, 65537, 720937, 9, 65537, 720938, 9, 65537, 720939, 9, 65537, 720940, 9, 65537, 720941, 9, 65537, 720942, 9, 65537, 720943, 9, 65537, 720944, 9, 65537, 720945, 9, 65537, 720946, 9, 65537, 720947, 9, 65537, 720948, 9, 65538, 786432, 9, 65536, 786433, 9, 65537, 786434, 9, 65537, 786435, 9, 65537, 786436, 9, 65537, 786437, 9, 65537, 786438, 9, 65537, 786439, 9, 65537, 786440, 9, 65538, 786441, 0, 65536, 786442, 0, 65537, 786443, 0, 65537, 786444, 0, 65537, 786445, 0, 65538, 786446, 9, 65536, 786447, 9, 65537, 786448, 9, 65537, 786449, 9, 65537, 786450, 9, 65537, 786451, 9, 65538, 786455, 9, 65536, 786456, 9, 65537, 786457, 9, 65537, 786458, 9, 65537, 786459, 9, 65537, 786460, 9, 65537, 786461, 9, 65537, 786462, 9, 65537, 786463, 9, 65537, 786464, 9, 65537, 786465, 9, 65537, 786466, 9, 65537, 786467, 9, 65537, 786468, 9, 65537, 786469, 9, 65537, 786470, 9, 65537, 786471, 9, 65537, 786472, 9, 65537, 786473, 9, 65537, 786474, 9, 65537, 786475, 9, 65537, 786476, 9, 65537, 786477, 9, 65537, 786478, 9, 65537, 786479, 9, 65537, 786480, 9, 65537, 786481, 9, 65537, 786482, 9, 65537, 786483, 9, 65537, 786484, 9, 65538, 851968, 9, 65536, 851969, 9, 65537, 851970, 9, 65537, 851971, 9, 65537, 851972, 9, 65537, 851973, 9, 65537, 851974, 9, 65537, 851975, 9, 65537, 851976, 9, 65538, 851977, 0, 131072, 851978, 0, 131073, 851979, 0, 131073, 851980, 0, 131073, 851981, 0, 131074, 851982, 9, 65536, 851983, 9, 65537, 851984, 9, 65537, 851985, 9, 65537, 851986, 9, 65537, 851987, 9, 65538, 851991, 9, 65536, 851992, 9, 65537, 851993, 9, 65537, 851994, 9, 65537, 851995, 9, 65537, 851996, 9, 65537, 851997, 9, 65537, 851998, 9, 65537, 851999, 9, 65537, 852000, 9, 65537, 852001, 9, 65537, 852002, 9, 65537, 852003, 9, 65537, 852004, 9, 65537, 852005, 9, 65537, 852006, 9, 65537, 852007, 9, 65537, 852008, 9, 65537, 852009, 9, 65537, 852010, 9, 65537, 852011, 9, 65537, 852012, 9, 65537, 852013, 9, 65537, 852014, 9, 65537, 852015, 9, 65537, 852016, 9, 65537, 852017, 9, 65537, 852018, 9, 65537, 852019, 9, 65537, 852020, 9, 65538, 917504, 9, 65536, 917505, 9, 65537, 917506, 9, 65537, 917507, 9, 65537, 917508, 9, 65537, 917509, 9, 65537, 917510, 9, 65537, 917511, 9, 65537, 917512, 9, 65537, 917513, 9, 65537, 917514, 9, 65537, 917515, 9, 65537, 917516, 9, 65537, 917517, 9, 65537, 917518, 9, 65537, 917519, 9, 65537, 917520, 9, 65537, 917521, 9, 65537, 917522, 9, 65537, 917523, 9, 65538, 917527, 9, 65536, 917528, 9, 65537, 917529, 9, 65537, 917530, 9, 65537, 917531, 9, 65537, 917532, 9, 65537, 917533, 9, 65537, 917534, 9, 65537, 917535, 9, 65537, 917536, 9, 65537, 917537, 9, 65537, 917538, 9, 65537, 917539, 9, 65537, 917540, 9, 65537, 917541, 9, 65537, 917542, 9, 65537, 917543, 9, 65537, 917544, 9, 65537, 917545, 9, 65537, 917546, 9, 65537, 917547, 9, 65537, 917548, 9, 65537, 917549, 9, 65537, 917550, 9, 65537, 917551, 9, 65537, 917552, 9, 65537, 917553, 9, 65537, 917554, 9, 65537, 917555, 9, 65537, 917556, 9, 65538, 983040, 9, 65536, 983041, 9, 65537, 983042, 9, 65537, 983043, 9, 65537, 983044, 9, 65537, 983045, 9, 65537, 983046, 9, 65537, 983047, 9, 65537, 983048, 9, 65537, 983049, 9, 65537, 983050, 9, 65537, 983051, 9, 65537, 983052, 9, 65537, 983053, 9, 65537, 983054, 9, 65537, 983055, 9, 65537, 983056, 9, 65537, 983057, 9, 65537, 983058, 9, 65537, 983059, 9, 65538, 983063, 9, 65536, 983064, 9, 65537, 983065, 9, 65537, 983066, 9, 65537, 983067, 9, 65537, 983068, 9, 65537, 983069, 9, 65537, 983070, 9, 65537, 983071, 9, 65537, 983072, 9, 65537, 983073, 9, 65537, 983074, 9, 65537, 983075, 9, 65537, 983076, 9, 65537, 983077, 9, 65537, 983078, 9, 65537, 983079, 9, 65537, 983080, 9, 65537, 983081, 9, 65537, 983082, 9, 65537, 983083, 9, 65537, 983084, 9, 65537, 983085, 9, 65537, 983086, 9, 65537, 983087, 9, 65537, 983088, 9, 65537, 983089, 9, 65537, 983090, 9, 65537, 983091, 9, 65537, 983092, 9, 65538 )
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 88, 52 )
-collision_mask = 14
+[node name="Gate" type="Node2D" parent="scenery"]
+script = ExtResource( 7 )
+b_camera = NodePath("../Camera2D")
+player = NodePath("../../Player")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="back" type="Area2D" parent="scenery/Gate"]
+position = Vector2( -45, 51 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="bg_color" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 576, 416 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scenery/Gate/back"]
+shape = SubResource( 64 )
 
-[node name="4-CloudCover2" type="Sprite" parent="ParallaxBackground/bg_color"]
-position = Vector2( 230, 30 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
+[node name="front" type="Area2D" parent="scenery/Gate"]
+position = Vector2( -4, 52 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="big_clouds" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.2, 0.2 )
-motion_mirroring = Vector2( 576, 0 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scenery/Gate/front"]
+shape = SubResource( 64 )
 
-[node name="4-CloudCover2" type="Sprite" parent="ParallaxBackground/big_clouds"]
-modulate = Color( 0.734375, 0.896786, 1, 1 )
-position = Vector2( 229, -13 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 3 )
+[node name="Camera2D" type="Camera2D" parent="scenery"]
+position = Vector2( -162, 52 )
 
-[node name="back_small_clouds" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.3, 0.3 )
-motion_mirroring = Vector2( 576, 0 )
-
-[node name="4-CloudCover3" type="Sprite" parent="ParallaxBackground/back_small_clouds"]
-modulate = Color( 0.867188, 0.948393, 1, 1 )
-material = ExtResource( 9 )
-position = Vector2( 433, 47 )
-scale = Vector2( 0.703, 0.703 )
-texture = ExtResource( 5 )
-
-[node name="4-CloudCover2" type="Sprite" parent="ParallaxBackground/back_small_clouds"]
-modulate = Color( 0.867188, 0.948393, 1, 1 )
-material = ExtResource( 9 )
-position = Vector2( 53, 82 )
-scale = Vector2( 0.714, 0.714 )
-texture = ExtResource( 5 )
-
-[node name="4-CloudCover4" type="Sprite" parent="ParallaxBackground/back_small_clouds"]
-modulate = Color( 0.867188, 0.948393, 1, 1 )
-material = ExtResource( 9 )
-position = Vector2( 255, 73 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 5 )
-
-[node name="small_clouds" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.6, 0.6 )
-motion_mirroring = Vector2( 576, 0 )
-
-[node name="4-CloudCover3" type="Sprite" parent="ParallaxBackground/small_clouds"]
-material = ExtResource( 9 )
-position = Vector2( 372, 46 )
-scale = Vector2( 1.025, 1.025 )
-texture = ExtResource( 5 )
-
-[node name="4-CloudCover2" type="Sprite" parent="ParallaxBackground/small_clouds"]
-material = ExtResource( 9 )
-position = Vector2( 92, 76 )
-texture = ExtResource( 5 )
-
-[node name="fall zone" type="Area2D" parent="."]
+[node name="fall zone" type="Area2D" parent="scenery"]
 position = Vector2( 348, 250 )
 collision_layer = 8
 collision_mask = 0
@@ -615,35 +641,54 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="fall zone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scenery/fall zone"]
 shape = SubResource( 63 )
 
-[node name="gate" type="Node2D" parent="."]
-script = ExtResource( 7 )
-b_camera = NodePath("../Camera2D")
-player = NodePath("../Player")
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 88, 52 )
+collision_mask = 14
 
-[node name="back" type="Area2D" parent="gate"]
-position = Vector2( -45, 51 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="fruits" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="gate/back"]
-shape = SubResource( 64 )
+[node name="Apple" parent="fruits" instance=ExtResource( 8 )]
+position = Vector2( 125, 101 )
 
-[node name="front" type="Area2D" parent="gate"]
-position = Vector2( -4, 52 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Apple2" parent="fruits" instance=ExtResource( 8 )]
+position = Vector2( 181, 101 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="gate/front"]
-shape = SubResource( 64 )
+[node name="Apple3" parent="fruits" instance=ExtResource( 8 )]
+position = Vector2( 162, 101 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( -162, 52 )
+[node name="Apple4" parent="fruits" instance=ExtResource( 8 )]
+position = Vector2( 143, 101 )
 
-[connection signal="body_entered" from="fall zone" to="fall zone" method="_on_fall_zone_body_entered"]
-[connection signal="body_entered" from="gate/back" to="gate" method="_on_back_body_entered"]
-[connection signal="body_entered" from="gate/front" to="gate" method="_on_front_body_entered"]
+[node name="Apple5" parent="fruits" instance=ExtResource( 8 )]
+position = Vector2( -124, 98 )
+
+[node name="Apple6" parent="fruits" instance=ExtResource( 8 )]
+position = Vector2( -68, 98 )
+
+[node name="Apple7" parent="fruits" instance=ExtResource( 8 )]
+position = Vector2( -87, 98 )
+
+[node name="Apple8" parent="fruits" instance=ExtResource( 8 )]
+position = Vector2( -106, 98 )
+
+[node name="Banana" parent="fruits" instance=ExtResource( 10 )]
+position = Vector2( 514, 132 )
+
+[node name="Banana2" parent="fruits" instance=ExtResource( 10 )]
+position = Vector2( 535, 132 )
+
+[node name="Banana3" parent="fruits" instance=ExtResource( 10 )]
+position = Vector2( -117, 77 )
+
+[node name="Banana5" parent="fruits" instance=ExtResource( 10 )]
+position = Vector2( -97, 76 )
+
+[node name="Banana4" parent="fruits" instance=ExtResource( 10 )]
+position = Vector2( -78, 76 )
+
+[connection signal="body_entered" from="scenery/Gate/back" to="scenery/Gate" method="_on_back_body_entered"]
+[connection signal="body_entered" from="scenery/Gate/front" to="scenery/Gate" method="_on_front_body_entered"]
+[connection signal="body_entered" from="scenery/fall zone" to="scenery/fall zone" method="_on_fall_zone_body_entered"]
