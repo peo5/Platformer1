@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Terrain/Terrain (16x16).png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/apple.tscn" type="PackedScene" id=8]
 [ext_resource path="res://materials/circular_motion_mat.tres" type="Material" id=9]
 [ext_resource path="res://scenes/banana.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/mushroom.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -645,7 +646,7 @@ __meta__ = {
 shape = SubResource( 63 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 88, 52 )
+position = Vector2( 49, -16 )
 collision_mask = 14
 
 [node name="fruits" type="Node2D" parent="."]
@@ -688,6 +689,9 @@ position = Vector2( -97, 76 )
 
 [node name="Banana4" parent="fruits" instance=ExtResource( 10 )]
 position = Vector2( -78, 76 )
+
+[node name="Mushroom" parent="." instance=ExtResource( 11 )]
+position = Vector2( 159, 77 )
 
 [connection signal="body_entered" from="scenery/Gate/back" to="scenery/Gate" method="_on_back_body_entered"]
 [connection signal="body_entered" from="scenery/Gate/front" to="scenery/Gate" method="_on_front_body_entered"]
