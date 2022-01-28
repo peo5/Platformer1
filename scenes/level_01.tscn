@@ -691,7 +691,10 @@ position = Vector2( -97, 76 )
 position = Vector2( -78, 76 )
 
 [node name="Mushroom" parent="." instance=ExtResource( 11 )]
-position = Vector2( 159, 77 )
+position = Vector2( 263, 24 )
+
+[node name="Mushroom2" parent="." instance=ExtResource( 11 )]
+position = Vector2( 474, 119 )
 
 [connection signal="body_entered" from="scenery/Gate/back" to="scenery/Gate" method="_on_back_body_entered"]
 [connection signal="body_entered" from="scenery/Gate/front" to="scenery/Gate" method="_on_front_body_entered"]
