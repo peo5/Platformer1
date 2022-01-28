@@ -34,8 +34,7 @@ func _patrol_process():
 	
 	if not idle and ray.is_colliding():
 		idle = true;
-		timer.set_wait_time(idle_time)
-		timer.start()
+		timer.start(idle_time)
 
 func _on_Timer_timeout():
 	

@@ -30,12 +30,12 @@ func _input_process(delta: float) -> void:
 	if not hurt:
 		dir = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 		vel.x = move_speed * dir * delta
+		
+		if vel.y == 0 and Input.is_action_just_pressed("jump"):
+			vel.y = jump_force
 	
 	if dir != 0:
 		sprite.scale.x = dir
-	
-	if vel.y == 0 and Input.is_action_just_pressed("jump"):
-		vel.y = jump_force
 
 func _anim_process():
 	
